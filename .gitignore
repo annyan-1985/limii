@@ -8,6 +8,7 @@ generated/
 # Env
 .env*
 !.env.example
+!.env.local.template
 
 # OS / editor
 .DS_Store

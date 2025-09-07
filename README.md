@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MyPro - Minimal Google Login (Next.js App Router + NextAuth v5)
 
 ## Quick Start
@@ -25,3 +26,7 @@ Open http://localhost:3000 and click "Sign in with Google".
 - `components/LoginButton.tsx` - client component to trigger Google login
 - `app/page.tsx` - server component showing login or user info
 - `app/layout.tsx` - basic layout
+=======
+# limii
+limii
+>>>>>>> 0f338f11c60155e77af19f8effe97c32d3a453de

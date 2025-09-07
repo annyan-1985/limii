@@ -1,28 +1,23 @@
-# Node.js
+# Node / Next
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-
-# Next.js
 .next/
-out/
 dist/
+out/
 
-# Env files
+# Env
 .env*
 !.env.example
 
-# OS / Editor
+# OS / editor
 .DS_Store
 Thumbs.db
-*.swp
-*.swo
+*.log
 .idea/
 .vscode/
-*.log
 
-# Prisma
+# Prisma (若有 sqlite)
 prisma/dev.db
 prisma/dev.db-journal
+
+# prisma engines（若生成在仓库内）
+generated/prisma/

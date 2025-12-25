@@ -1,4 +1,6 @@
 // data/products.ts
+import Image from "next/image";
+
 export type Product = {
   id: string;
   title: string;
@@ -14,21 +16,21 @@ export const PRODUCTS: Product[] = [
     title: "Custom Uniform Sticker - Primary",
     slug: "uniform-sticker-primary",
     priceCents: 1699,
-    imageUrl:"https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&w=1200",
+    imageUrl:"images/pic1.png",
   },
   {
     id: "p2",
     title: "Instrument Sticker - Saxophone",
     slug: "instrument-sticker-sax",
     priceCents: 1299,
-    imageUrl: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&w=1200",
+    imageUrl: "images/pic1.png"
   },
   {
     id: "p3",
     title: "Sports Sticker - Jump Rope",
     slug: "sports-sticker-jumprope",
     priceCents: 999,
-    imageUrl: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&w=1200",
+    imageUrl: "images/pic1.png",
   },
 ];
 

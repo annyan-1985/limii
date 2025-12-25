@@ -40,26 +40,6 @@ export default async function Page() {
               </div>
             </div>
 
-            <div className="heroCard">
-              <p className="heroCardTitle">Preview what’s inside</p>
-              <p className="muted" style={{ marginTop: 0 }}>
-                Pick a set that matches your school life — uniforms, sports, and instruments.
-              </p>
-
-              <div className="section" style={{ marginTop: 16 }}>
-                <div className="heroMiniGrid">
-                  {thumbs.map((src) => (
-                    <div key={src} className="miniThumb">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={src} alt="Product preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                    </div>
-                  ))}
-                  {thumbs.length < 2 && (
-                    <div className="miniThumb" />
-                  )}
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -79,7 +59,6 @@ export default async function Page() {
                   <img
                     src={p.imageUrl ?? "https://placehold.co/800x600?text=Product"}
                     alt={p.title}
-                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
                 </div>
 

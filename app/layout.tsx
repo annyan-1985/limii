@@ -41,10 +41,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <header className="header">
             <div className="container">
               <div className="headerInner">
-                <Link href="/" className="brand">
-                  <span className="brandMark" aria-hidden />
-                  <span>Limii</span>
-                </Link>
+                  <Link href="/" className="brand" aria-label="Limii home">
+                      <img
+                          src="/images/limii.png"
+                          alt="Limii"
+                          width={80}
+                          height={80}
+                          className="brandLogo"
+                      />
+                      <span>Limii</span>
+                  </Link>
 
                 <nav className="nav" aria-label="Primary">
                   <Link href="/">Home</Link>

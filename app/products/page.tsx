@@ -1,33 +1,34 @@
 // app/products/page.tsx
-import { PRODUCTS } from "@/data/products";
 import ProductCard from "@/components/ProductCard";
-import { auth } from "@/lib/auth";
+import { PRODUCTS } from "@/data/products";
 
-export const metadata = { title: "Products | MyPro" };
+export const metadata = { title: "Shop" };
 
 export default async function ProductsPage() {
-  const session = await auth();
-  // if (!session) return <div style={{ padding: 24 }}>Please sign in to view products.</div>;
-
-  // 防御：确认 PRODUCTS 是数组
-  if (!Array.isArray(PRODUCTS)) {
-    return <main style={{ padding: 24 }}>No products data.</main>;
+  if (!Array.isArray(PRODUCTS) || PRODUCTS.length === 0) {
+    return <div className="muted">No products data.</div>;
   }
 
   return (
-    <main style={{ maxWidth: 1100, margin: "0 auto", padding: "1.5rem" }}>
-      <h1 style={{ fontSize: 28, fontWeight: 700, marginBottom: 16 }}>All Products</h1>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-          gap: 16,
-        }}
-      >
+    <div>
+      <div className="sectionHeader">
+        <div>
+          <h1 style={{ margin: 0, fontSize: 22, letterSpacing: "-0.02em" }}>All Products</h1>
+          <div className="muted" style={{ marginTop: 6 }}>
+            {PRODUCTS.length} items • Shipping calc at checkout
+          </div>
+        </div>
+
+        <div className="muted" style={{ fontSize: 13 }}>
+          Inspired by clean storefront layouts (search + mega‑menus + featured collections).
+        </div>
+      </div>
+
+      <div className="grid">
         {PRODUCTS.map((p) => (
           <ProductCard key={p.id} product={p} />
         ))}
       </div>
-    </main>
+    </div>
   );
 }

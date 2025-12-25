@@ -1,28 +1,64 @@
 "use client";
-import { useCart } from "@/lib/store/cart";
+
+import Link from "next/link";
+
 import { formatAUD } from "@/data/products";
+import { useCart } from "@/lib/store/cart";
 
 export default function CartPage() {
   const { items, remove, clear } = useCart();
   const total = items.reduce((s, i) => s + i.priceCents * i.quantity, 0);
 
-  if (items.length === 0) return <main style={{ padding: 24 }}>Your cart is empty.</main>;
+  if (items.length === 0) {
+    return (
+      <div className="card" style={{ padding: 18 }}>
+        <h1 style={{ marginTop: 0 }}>Your cart is empty</h1>
+        <p className="muted">Add something cute and come back 🙂</p>
+        <Link href="/products" className="btn btnPrimary" style={{ display: "inline-block" }}>
+          Browse products
+        </Link>
+      </div>
+    );
+  }
 
   return (
-    <main style={{ maxWidth: 600, margin: "0 auto" }}>
-      <h1>Your Cart</h1>
-      <ul style={{ listStyle: "none", padding: 0 }}>
+    <div style={{ maxWidth: 760, margin: "0 auto" }}>
+      <div className="sectionHeader">
+        <div>
+          <h1 style={{ margin: 0, fontSize: 22, letterSpacing: "-0.02em" }}>Your Cart</h1>
+          <div className="muted" style={{ marginTop: 6 }}>Review items and remove anything you don’t want.</div>
+        </div>
+        <button onClick={clear} className="btn">Clear cart</button>
+      </div>
+
+      <ul className="list">
         {items.map((i) => (
-          <li key={i.id} style={{ display: "flex", gap: 8, justifyContent: "space-between", marginBottom: 8 }}>
-            <span>{i.title} × {i.quantity}</span>
-            <span>{formatAUD(i.priceCents * i.quantity)}</span>
-            <button onClick={() => remove(i.id)}>Remove</button>
+          <li key={i.id} className="cartRow">
+            <div>
+              <div style={{ fontWeight: 800 }}>{i.title}</div>
+              <div className="muted" style={{ marginTop: 4 }}>
+                {i.quantity} × {formatAUD(i.priceCents)}
+              </div>
+            </div>
+            <div style={{ display: "grid", justifyItems: "end", gap: 8 }}>
+              <div style={{ fontWeight: 900 }}>{formatAUD(i.priceCents * i.quantity)}</div>
+              <button onClick={() => remove(i.id)} className="btn">
+                Remove
+              </button>
+            </div>
           </li>
         ))}
       </ul>
-      <hr />
-      <p>Total: {formatAUD(total)}</p>
-      <button onClick={clear} style={{ marginTop: 12 }}>Clear cart</button>
-    </main>
+
+      <div className="card" style={{ padding: 18, marginTop: 14 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12 }}>
+          <div>
+            <div className="muted">Total</div>
+            <div style={{ fontSize: 22, fontWeight: 950, letterSpacing: "-0.02em" }}>{formatAUD(total)}</div>
+          </div>
+          <button className="btn btnPrimary">Checkout (demo)</button>
+        </div>
+      </div>
+    </div>
   );
 }

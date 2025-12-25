@@ -7,17 +7,8 @@ export default function ProductCard({ product }: { product: Product }) {
   const add = useCart((s) => s.add);
 
   return (
-    <div
-      style={{
-        border: "1px solid #e5e7eb",
-        borderRadius: 12,
-        padding: 16,
-        display: "flex",
-        flexDirection: "column",
-        gap: 12,
-      }}
-    >
-      <div style={{ aspectRatio: "4/3", overflow: "hidden", borderRadius: 8 }}>
+    <div className="card pCard">
+      <div className="pMedia">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={product.imageUrl ?? "https://placehold.co/800x600?text=Product"}
@@ -25,22 +16,21 @@ export default function ProductCard({ product }: { product: Product }) {
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
       </div>
-      <div style={{ fontWeight: 600 }}>{product.title}</div>
-      <div>{formatAUD(product.priceCents)}</div>
-      <button
-        onClick={() => add(product)}
-        style={{
-          marginTop: "auto",
-          padding: "0.6rem 1rem",
-          background: "#111827",
-          color: "#fff",
-          border: "none",
-          borderRadius: 8,
-          cursor: "pointer",
-        }}
-      >
-        Add to cart
-      </button>
+
+      <div className="pBody">
+        <div className="pTitle">{product.title}</div>
+
+        <div className="pMetaRow">
+          <div className="pPrice">{formatAUD(product.priceCents)}</div>
+          <span className="badge" style={{ background: "rgba(15, 23, 42, 0.04)", border: "1px solid rgba(15, 23, 42, 0.10)" }}>
+            In stock
+          </span>
+        </div>
+
+        <button onClick={() => add(product)} className="btn btnPrimary" style={{ marginTop: 2 }}>
+          Add to cart
+        </button>
+      </div>
     </div>
   );
 }

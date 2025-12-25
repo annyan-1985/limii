@@ -1,40 +1,76 @@
 // app/layout.tsx
+import "./globals.css";
+
 import Link from "next/link";
+import { Inter } from "next/font/google";
+
 import CartButton from "@/components/CartButton";
 
+const inter = Inter({ subsets: ["latin"], display: "swap" });
+
 export const metadata = {
-  title: "MyPro",
-  description: "Demo shop",
+  title: {
+    default: "Limii",
+    template: "%s · Limii",
+  },
+  description: "Limii — customisable kids stickers & planning boards",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body style={{ fontFamily: "system-ui, sans-serif", margin: 0 }}>
-        {/* 顶部导航条 */}
-        <header
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 16,
-            padding: "12px 16px",
-            borderBottom: "1px solid #eee",
-            position: "sticky",
-            top: 0,
-            background: "#fff",
-            zIndex: 10,
-          }}
-        >
-          <nav style={{ display: "flex", gap: 12 }}>
-            <Link href="/">Home</Link>
-            <Link href="/products">Products</Link>
-          </nav>
-          {/* 右上角购物车图标与数量徽标 */}
-          <CartButton />
-        </header>
+      <body className={inter.className}>
+        <div className="page">
+          {/* Announcement bar (MeeQ-style) */}
+          <div className="announce">
+            <div className="container">
+              <span>
+                ✨ New Year drop is coming — customise your 2026 calendar with school-uniform stickers.
+              </span>
+              <span className="muted">
+                Tip: press <span className="kbd">⌘</span> + <span className="kbd">K</span> (soon) to search
+              </span>
+            </div>
+          </div>
 
-        <main style={{ padding: "16px" }}>{children}</main>
+          {/* Sticky header */}
+          <header className="header">
+            <div className="container">
+              <div className="headerInner">
+                <Link href="/" className="brand">
+                  <span className="brandMark" aria-hidden />
+                  <span>Limii</span>
+                </Link>
+
+                <nav className="nav" aria-label="Primary">
+                  <Link href="/">Home</Link>
+                  <Link href="/products">Shop</Link>
+                </nav>
+
+                <div className="headerRight">
+                  <div className="search" aria-label="Search">
+                    <span aria-hidden>⌕</span>
+                    <input placeholder="Search products (coming soon)…" />
+                  </div>
+                  <CartButton />
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <main className="main">
+            <div className="container">{children}</div>
+          </main>
+
+          <footer className="footer">
+            <div className="container">
+              <div className="footerInner">
+                <span>© {new Date().getFullYear()} Limii</span>
+                <span className="muted">Made with ❤️ in Australia</span>
+              </div>
+            </div>
+          </footer>
+        </div>
       </body>
     </html>
   );

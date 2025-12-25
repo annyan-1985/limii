@@ -7,7 +7,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const add = useCart((s) => s.add);
 
   return (
-    <div className="card pCard">
+    <div id={product.slug} className="card pCard">
       <div className="pMedia">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img

@@ -4,7 +4,8 @@ import Link from "next/link";
 import { auth } from "@/lib/auth";
 import LoginButton from "@/components/LoginButton";
 import SignOutButton from "@/components/SignOutButton";
-import { PRODUCTS } from "@/data/products";
+import ProductTicker from "@/components/ProductTicker";
+import { PRODUCTS, formatAUD } from "@/data/products";
 
 export default async function Page() {
   const session = await auth();
@@ -14,6 +15,7 @@ export default async function Page() {
   if (!session) {
     return (
       <div>
+        <ProductTicker />
         <section className="hero">
           <div className="heroInner">
             <div>
@@ -75,15 +77,29 @@ export default async function Page() {
 
           <div className="grid">
             {PRODUCTS.slice(0, 3).map((p) => (
-              <div key={p.id} className="card" style={{ padding: 14 }}>
-                <div className="muted" style={{ fontSize: 12, marginBottom: 6 }}>
-                  Starter pack
+              <Link key={p.id} href={`/products#${p.slug}`} className="card pCard" style={{ textDecoration: "none" }}>
+                <div className="pMedia">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={p.imageUrl ?? "https://placehold.co/800x600?text=Product"}
+                    alt={p.title}
+                    style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                  />
                 </div>
-                <div style={{ fontWeight: 800 }}>{p.title}</div>
-                <div className="muted" style={{ marginTop: 6 }}>
-                  From {(p.priceCents / 100).toFixed(2)} AUD
+
+                <div className="pBody" style={{ gap: 8 }}>
+                  <div className="muted" style={{ fontSize: 12 }}>
+                    Featured
+                  </div>
+                  <div className="pTitle">{p.title}</div>
+                  <div className="pMetaRow" style={{ marginTop: 2 }}>
+                    <div className="pPrice">{formatAUD(p.priceCents)}</div>
+                    <span className="badge" style={{ background: "rgba(15, 23, 42, 0.04)", border: "1px solid rgba(15, 23, 42, 0.10)" }}>
+                      View
+                    </span>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </section>
@@ -93,6 +109,7 @@ export default async function Page() {
 
   return (
     <div>
+      <ProductTicker />
       <section className="hero">
         <div className="heroInner">
           <div>
@@ -144,10 +161,30 @@ export default async function Page() {
         </div>
         <div className="grid">
           {PRODUCTS.map((p) => (
-            <Link key={p.id} href="/products" className="card" style={{ padding: 14 }}>
-              <div style={{ fontWeight: 800 }}>{p.title}</div>
-              <div className="muted" style={{ marginTop: 6 }}>
-                {(p.priceCents / 100).toLocaleString("en-AU", { style: "currency", currency: "AUD" })}
+            <Link key={p.id} href={`/products#${p.slug}`} className="card pCard" style={{ textDecoration: "none" }}>
+              <div className="pMedia">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={p.imageUrl ?? "https://placehold.co/800x600?text=Product"}
+                  alt={p.title}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              </div>
+
+              <div className="pBody" style={{ gap: 8 }}>
+                <div className="muted" style={{ fontSize: 12 }}>
+                  Popular
+                </div>
+                <div className="pTitle">{p.title}</div>
+                <div className="pMetaRow" style={{ marginTop: 2 }}>
+                  <div className="pPrice">{formatAUD(p.priceCents)}</div>
+                  <span
+                    className="badge"
+                    style={{ background: "rgba(15, 23, 42, 0.04)", border: "1px solid rgba(15, 23, 42, 0.10)" }}
+                  >
+                    View
+                  </span>
+                </div>
               </div>
             </Link>
           ))}

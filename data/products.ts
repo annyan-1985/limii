@@ -1,6 +1,4 @@
 // data/products.ts
-import Image from "next/image";
-
 export type Product = {
   id: string;
   title: string;

@@ -2,8 +2,6 @@
 import Link from "next/link";
 
 import { auth } from "@/lib/auth";
-import LoginButton from "@/components/LoginButton";
-import SignOutButton from "@/components/SignOutButton";
 import ProductTicker from "@/components/ProductTicker";
 import { PRODUCTS, formatAUD } from "@/data/products";
 
@@ -43,12 +41,10 @@ export default async function Page() {
             </div>
 
             <div className="heroCard">
-              <p className="heroCardTitle">Sign in to continue</p>
+              <p className="heroCardTitle">Preview what’s inside</p>
               <p className="muted" style={{ marginTop: 0 }}>
-                This demo uses Google Sign‑In.
+                Pick a set that matches your school life — uniforms, sports, and instruments.
               </p>
-
-              <LoginButton />
 
               <div className="section" style={{ marginTop: 16 }}>
                 <div className="heroMiniGrid">
@@ -127,7 +123,6 @@ export default async function Page() {
               <Link href="/products" className="btn btnPrimary">
                 Go to shop
               </Link>
-              <SignOutButton />
             </div>
 
             <p className="muted" style={{ marginTop: 16, wordBreak: "break-all" }}>

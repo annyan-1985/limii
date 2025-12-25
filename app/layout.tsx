@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Inter } from "next/font/google";
 
 import CartButton from "@/components/CartButton";
+import HeaderAuth from "@/components/HeaderAuth";
+import { auth } from "@/lib/auth";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
@@ -16,7 +18,9 @@ export const metadata = {
   description: "Limii — customisable kids stickers & planning boards",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const session = await auth();
+
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -52,6 +56,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <span aria-hidden>⌕</span>
                     <input placeholder="Search products (coming soon)…" />
                   </div>
+                  <HeaderAuth
+                    isAuthed={!!session}
+                    name={session?.user?.name}
+                    image={session?.user?.image}
+                  />
                   <CartButton />
                 </div>
               </div>

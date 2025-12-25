@@ -21,14 +21,14 @@ export const PRODUCTS: Product[] = [
     title: "Instrument Sticker - Saxophone",
     slug: "instrument-sticker-sax",
     priceCents: 1299,
-    imageUrl: "images/pic1.png"
+    imageUrl: "images/ad2.png"
   },
   {
     id: "p3",
     title: "Sports Sticker - Jump Rope",
     slug: "sports-sticker-jumprope",
     priceCents: 999,
-    imageUrl: "images/pic1.png",
+    imageUrl: "images/ad0.png",
   },
 ];
 

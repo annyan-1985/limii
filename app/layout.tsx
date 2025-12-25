@@ -2,6 +2,7 @@
 import "./globals.css";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Inter } from "next/font/google";
 
 import CartButton from "@/components/CartButton";
@@ -41,16 +42,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <header className="header">
             <div className="container">
               <div className="headerInner">
-                  <Link href="/" className="brand" aria-label="Limii home">
-                      <img
-                          src="/images/limii.png"
-                          alt="Limii"
-                          width={80}
-                          height={80}
-                          className="brandLogo"
-                      />
-                      <span>Limii</span>
-                  </Link>
+                <Link href="/" className="brand" aria-label="Limii home">
+                  <Image
+                    src="/images/limii.png"
+                    alt="Limii"
+                    width={64}
+                    height={64}
+                    className="brandLogo"
+                    priority
+                  />
+                </Link>
 
                 <nav className="nav" aria-label="Primary">
                   <Link href="/">Home</Link>

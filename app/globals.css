@@ -175,18 +175,27 @@ img { max-width: 100%; display: block; }
 
 .headerInner {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "brand nav right";
   align-items: center;
   gap: 12px;
   padding: 14px 0;
 }
 
 .brand {
+  grid-area: brand;
   display: inline-flex;
   align-items: center;
   gap: 10px;
   font-weight: 800;
   letter-spacing: -0.02em;
+}
+
+.brandLogo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  flex: 0 0 auto;
 }
 
 .brandMark {
@@ -198,6 +207,7 @@ img { max-width: 100%; display: block; }
 }
 
 .nav {
+  grid-area: nav;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -217,10 +227,47 @@ img { max-width: 100%; display: block; }
 }
 
 .headerRight {
+  grid-area: right;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 10px;
+}
+
+/* Mobile header layout: logo on its own line, nav + actions on the second line */
+@media (max-width: 900px) {
+  .headerInner {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "brand brand"
+      "nav right";
+    row-gap: 10px;
+    padding: 12px 0;
+  }
+
+  .brand {
+    justify-self: center;
+  }
+
+  .brandLogo {
+    width: 52px;
+    height: 52px;
+  }
+
+  .nav {
+    justify-self: start;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .nav a {
+    padding: 7px 9px;
+  }
+
+  .headerRight {
+    justify-self: end;
+    gap: 8px;
+  }
 }
 
 /* Header auth (sign-in / profile) */
@@ -288,21 +335,27 @@ img { max-width: 100%; display: block; }
 }
 
 .search {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* Compact search on mobile (icon only). */
+.search input {
   display: none;
 }
 
 @media (min-width: 900px) {
   .search {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
     padding: 10px 12px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: rgba(255, 255, 255, 0.7);
     min-width: 260px;
   }
   .search input {
+    display: block;
     border: 0;
     outline: 0;
     background: transparent;

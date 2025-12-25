@@ -8,8 +8,8 @@ import { PRODUCTS, formatAUD } from "@/data/products";
 export default async function Page() {
   const session = await auth();
 
-  const thumbs = PRODUCTS.slice(0, 2).map((p) => p.imageUrl).filter(Boolean) as string[];
 
+  const heroAd = PRODUCTS[0];
   if (!session) {
     return (
       <div>
@@ -42,6 +42,30 @@ export default async function Page() {
 
           </div>
         </section>
+
+
+
+      {heroAd && (
+          <section className="section" style={{ paddingTop: 0 }}>
+              <Link
+                  href={`/products#${heroAd.slug}`}
+                  className="heroAd"
+                  style={{ textDecoration: "none" }}
+              >
+                  <div className="heroAdMedia">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                          src={heroAd.imageUrl ?? "https://placehold.co/1600x600?text=Limii+Ad"}
+                          alt={heroAd.title}
+                      />
+                  </div>
+
+                  <div className="heroAdOverlay">
+
+                  </div>
+              </Link>
+          </section>
+      )}
 
         <section className="section">
           <div className="sectionHeader">

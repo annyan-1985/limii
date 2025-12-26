@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 
 import { formatAUD } from "@/data/products";
 import { useCart } from "@/lib/store/cart";
@@ -8,6 +9,30 @@ import { useCart } from "@/lib/store/cart";
 export default function CartPage() {
   const { items, remove, clear } = useCart();
   const total = items.reduce((s, i) => s + i.priceCents * i.quantity, 0);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function checkout() {
+    setError(null);
+    setIsCheckingOut(true);
+    try {
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          items: items.map((i) => ({ id: i.id, quantity: i.quantity })),
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data?.error ?? "Checkout failed");
+      if (!data?.url) throw new Error("Missing Stripe checkout URL");
+      window.location.href = data.url;
+    } catch (e: any) {
+      setError(e?.message ?? "Checkout failed");
+      setIsCheckingOut(false);
+    }
+  }
 
   if (items.length === 0) {
     return (
@@ -28,7 +53,7 @@ export default function CartPage() {
           <h1 style={{ margin: 0, fontSize: 22, letterSpacing: "-0.02em" }}>Your Cart</h1>
           <div className="muted" style={{ marginTop: 6 }}>Review items and remove anything you don’t want.</div>
         </div>
-        <button onClick={clear} className="btn">Clear cart</button>
+        <button onClick={clear} className="btn" disabled={isCheckingOut}>Clear cart</button>
       </div>
 
       <ul className="list">
@@ -56,8 +81,16 @@ export default function CartPage() {
             <div className="muted">Total</div>
             <div style={{ fontSize: 22, fontWeight: 950, letterSpacing: "-0.02em" }}>{formatAUD(total)}</div>
           </div>
-          <button className="btn btnPrimary">Checkout (demo)</button>
+          <button className="btn btnPrimary" onClick={checkout} disabled={isCheckingOut}>
+            {isCheckingOut ? "Redirecting…" : "Checkout"}
+          </button>
         </div>
+
+        {error && (
+          <div className="muted" style={{ marginTop: 10, color: "crimson" }}>
+            {error}
+          </div>
+        )}
       </div>
     </div>
   );

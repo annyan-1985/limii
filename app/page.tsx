@@ -44,13 +44,6 @@
             </div>
           </section>
 
-          <section className="section">
-            <div className="sectionHeader">
-              <h2>Featured</h2>
-              <Link className="muted" href="/products">
-                View all →
-              </Link>
-            </div>
 
 
         <section>
@@ -76,6 +69,14 @@
               </div>
             )}
         </section>
+        
+          <section className="section">
+            <div className="sectionHeader">
+              <h2>Featured</h2>
+              <Link className="muted" href="/products">
+                View all →
+              </Link>
+            </div>
 
             <div className="grid">
               {PRODUCTS.slice(0, 3).map((p) => (

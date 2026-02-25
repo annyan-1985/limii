@@ -82,7 +82,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <div className="container">
               <div className="footerInner">
                 <span>© {new Date().getFullYear()} Limii</span>
-                <span className="muted">Made with ❤️ in Australia</span>
+                <span className="muted">  50% of profits proudly support the Children’s Tumor Foundation</span>
               </div>
             </div>
           </footer>

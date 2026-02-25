@@ -18,16 +18,16 @@ export const PRODUCTS: Product[] = [
   },
   {
     id: "p2",
-    title: "Instrument Sticker - Saxophone",
+    title: "Custom Uniform Sticker - 2 pack",
     slug: "instrument-sticker-sax",
-    priceCents: 1299,
+    priceCents: 2699,
     imageUrl: "images/ad2.png"
   },
   {
     id: "p3",
-    title: "Sports Sticker - Jump Rope",
+    title: "Custom Uniform Sticker - 4 pack",
     slug: "sports-sticker-jumprope",
-    priceCents: 999,
+    priceCents: 4699,
     imageUrl: "images/ad0.png",
   },
 ];

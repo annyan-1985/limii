@@ -8,7 +8,8 @@
   export default async function Page() {
     const session = await auth();
   
-
+    const heroYoutubeId = process.env.NEXT_PUBLIC_HERO_YOUTUBE_ID;
+    const heroYoutubeEmbedUrl = `https://www.youtube.com/embed/JJhpQ7j4OKw?rel=0&modestbranding=1`;
     const heroAd = PRODUCTS[0];
     if (!session) {
       return (
@@ -50,6 +51,31 @@
                 View all →
               </Link>
             </div>
+
+
+        <section>
+           {heroYoutubeEmbedUrl && (
+              <div
+                style={{
+                  marginTop: 20,
+                  borderRadius: 16,
+                  overflow: "hidden",
+                  border: "1px solid var(--border)",
+                  background: "#fff",
+                }}
+              >
+                <iframe
+                  src={heroYoutubeEmbedUrl}
+                  title="Limii Demo Video"
+                  width="100%"
+                  height="360"
+                  style={{ border: 0, display: "block" }}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            )}
+        </section>
 
             <div className="grid">
               {PRODUCTS.slice(0, 3).map((p) => (
@@ -108,7 +134,7 @@
                 <b>Email:</b> {session.user?.email}
               </p>
             </div>
-
+           
             <div className="heroCard">
               <p className="heroCardTitle">Your profile</p>
               {session.user?.image && (
@@ -125,7 +151,6 @@
             </div>
           </div>
         </section>
-
         <section className="section">
           <div className="sectionHeader">
             <h2>Popular right now</h2>

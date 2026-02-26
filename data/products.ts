@@ -11,9 +11,9 @@ export type Product = {
 export const PRODUCTS: Product[] = [
   {
     id: "p1",
-    title: "Custom Uniform Sticker - Primary",
+    title: "Custom Uniform Sticker",
     slug: "uniform-sticker-primary",
-    priceCents: 50,
+    priceCents: 1699,
     imageUrl:"images/pic1.png",
   },
   {

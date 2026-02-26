@@ -13,7 +13,7 @@ export const PRODUCTS: Product[] = [
     id: "p1",
     title: "Custom Uniform Sticker - Primary",
     slug: "uniform-sticker-primary",
-    priceCents: 1699,
+    priceCents: 10,
     imageUrl:"images/pic1.png",
   },
   {
